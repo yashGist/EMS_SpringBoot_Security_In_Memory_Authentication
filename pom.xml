@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com</groupId>
-    <artifactId>EMS</artifactId>
+    <artifactId>EMS_In_Memory_Auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>EMS</name>
     <description>EMS</description>
@@ -82,6 +82,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
     <build>
