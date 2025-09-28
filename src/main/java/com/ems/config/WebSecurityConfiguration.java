@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -24,7 +25,15 @@ public class WebSecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    // 2. BEAN ADDED
+    /**
+     * This bean is essential for Spring Security to handle session lifecycle events,
+     * which is required for concurrent session control.
+     */
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
     /**
      * Configures in-memory users with game character names.
      */
@@ -68,6 +77,7 @@ public class WebSecurityConfiguration {
                 )
                 .sessionManagement(session -> session
                         .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
                 );
 
         return http.build();
